@@ -32,16 +32,11 @@ repos:
       - id: bandit
         exclude: site-packages/
         args: ["--quiet"]
-  # Removed due to:
-  #  ImportError: urllib3 v2.0 only supports OpenSSL 1.1.1+,
-  # currently the 'ssl' module is compiled with
-  # 'OpenSSL 1.0.2k-fips  26 Jan 2017'.
-  #  See: https://github.com/urllib3/urllib3/issues/2168
-  # - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-  #   rev: v1.3.1
-  # hooks:
-  #   - id: python-safety-dependencies-check
-  #     exclude: site-packages/|pyproject.toml
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+    rev: v1.3.1
+    hooks:
+      - id: python-safety-dependencies-check
+        exclude: site-packages/|pyproject.toml
   - repo: https://github.com/psf/black
     rev: 23.3.0
     hooks:
