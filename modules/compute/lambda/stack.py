@@ -2,7 +2,6 @@ import os
 
 import cdk_nag
 from aws_cdk import Aspects, Aws, Stack
-from aws_cdk import aws_iam as iam
 from aws_cdk import aws_lambda as _lambda
 from aws_cdk import aws_s3 as s3
 from constructs import Construct
@@ -45,11 +44,6 @@ class Stack(Stack):
             ],
         )
         bucket.grant_read(self.lambda_function)
-        self.lambda_function.role.add_managed_policy(
-            iam.ManagedPolicy.from_aws_managed_policy_name(
-                "AWSLambdaBasicExecutionRole"
-            )
-        )
         cdk_nag.NagSuppressions.add_resource_suppressions(
             self.lambda_function.role,
             [
