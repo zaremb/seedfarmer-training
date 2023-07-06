@@ -1,2 +1,2 @@
 name: bucket
-path: git::https://github.com/zaremb/seedfarmer-training.git//modules/storage/bucket
+path: modules/storage/bucket
