@@ -1,0 +1,27 @@
+deploy:
+  phases:
+    install:
+      commands:
+        - npm install -g aws-cdk@2.79.1
+        - wget -O jq https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64
+        - chmod +x ./jq
+        - mv jq /usr/local/bin
+        - pip install -r requirements.txt
+    build:
+      commands:
+        - cdk deploy --require-approval never --progress events --app "python app.py" --outputs-file ./cdk-exports.json
+        - cat cdk-exports.json
+        - BUCKET_NAME =`python -c "import json; file=open('cdk-exports.json'); print(json.loads(json.load(file)['training-${TRAINING_DEPLOYMENT_NAME}-${TRAINING_MODULE_NAME}']['metadata'])['bucket'])"`
+        - export TRAINING_MODULE_METADATA=$(python -c "import json; file=open('cdk-exports.json'); print(json.load(file)['training-${TRAINING_DEPLOYMENT_NAME}-${TRAINING_MODULE_NAME}']['metadata'])")
+destroy:
+  phases:
+    install:
+      commands:
+        - npm install -g aws-cdk@2.79.1
+        - wget -O jq https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64
+        - chmod +x ./jq
+        - mv jq /usr/local/bin
+        - pip install -r requirements.txt
+    build:
+      commands:
+        - cdk destroy --force --app "python app.py"

@@ -1,0 +1,63 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-builtin-literals
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-xml
+      - id: check-yaml
+        args: ["--unsafe"]
+        exclude: templates/
+      - id: debug-statements
+      - id: detect-aws-credentials
+        args: ["--allow-missing-credentials"]
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+      - id: pretty-format-json
+        args: ["--autofix", "--no-sort-keys", "--indent=4", "--no-ensure-ascii"]
+      - id: trailing-whitespace
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        exclude: site-packages/
+        args: ["--quiet"]
+  # Removed due to:
+  #  ImportError: urllib3 v2.0 only supports OpenSSL 1.1.1+,
+  # currently the 'ssl' module is compiled with
+  # 'OpenSSL 1.0.2k-fips  26 Jan 2017'.
+  #  See: https://github.com/urllib3/urllib3/issues/2168
+  # - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+  #   rev: v1.3.1
+  # hooks:
+  #   - id: python-safety-dependencies-check
+  #     exclude: site-packages/|pyproject.toml
+  - repo: https://github.com/psf/black
+    rev: 23.3.0
+    hooks:
+      - id: black
+        exclude: site-packages/
+        args: ["--line-length=88"]
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        name: isort (python)
+        exclude: site-packages/
+        args: ["--profile", "black", "--filter-files", "true"]
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+        args: ["--config", ".flake8.cfg"]
+        exclude: site-packages/
