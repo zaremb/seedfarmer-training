@@ -25,7 +25,7 @@ stack = Stack(
 CfnOutput(
     scope=stack,
     id="metadata",
-    value=stack.to_json_string({"bucket": stack.bucket.bucket_name}),
+    value=stack.to_json_string({"bucket_name": stack.bucket.bucket_name}),
 )
 
 app.synth()
