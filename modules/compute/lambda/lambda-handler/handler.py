@@ -1,3 +1,4 @@
+import json
 import os
 
 import boto3
@@ -22,9 +23,10 @@ def lambda_handler(event, context):
         if obj["Key"].endswith(".json"):
             # Retrieve the JSON file content
             response = s3_client.get_object(Bucket=BUCKET_NAME, Key=obj["Key"])
-            json_data = response["Body"].read().decode("utf-8")
+            json_data = json.loads(response["Body"].read().decode("utf-8"))
 
             # Print the JSON file content
-            logger.info(f'File: {obj["Key"]}\n{json_data}')
+            logger.info(f'File: {obj["Key"]}')
+            logger.info(json_data)
 
     return {"statusCode": 200, "body": "JSON files processed successfully"}
