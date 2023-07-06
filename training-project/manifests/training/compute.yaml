@@ -1,0 +1,25 @@
+name: lambda
+path: git::https://github.com/zaremb/seedfarmer-training.git//modules/compute/lambda
+parameters:
+  # From other module
+  - name: bucket_name
+    valueFrom:
+      moduleMetadata:
+        group: storage
+        name: bucket
+        key: bucket_name
+
+  # Hardcoded value - not recommended. Use environment variables
+  # with .env vars
+  # - name: bucket_name
+  #   value: training-training-storage-[...]
+
+  # From environment variable
+  # - name: bucket_name
+  #   valueFrom:
+  #     envVariable: BUCKET_NAME
+
+  # From SSM parameter
+  # - name: bucket_name
+  #   valueFrom:
+  #     parameterStore: /seedfarmer/training/bucket-name

@@ -1,0 +1,17 @@
+name: training
+toolchainRegion: eu-central-1
+groups:
+  - name: storage
+    path: manifests/training/storage.yaml
+  - name: compute
+    path: manifests/training/compute.yaml
+
+targetAccountMappings:
+  - alias: primary
+    accountId:
+      valueFrom:
+        envVariable: TARGET_ACCOUNT_ID
+    default: true
+    regionMappings:
+      - region: eu-central-1
+        default: true
