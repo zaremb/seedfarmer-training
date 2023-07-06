@@ -26,7 +26,7 @@ Resources:
               - "s3:List*"
             Effect: Allow
             Resource:
-              - "arn:aws:s3:::${AWS::AccountId}*"
+              - "*"
         Version: 2012-10-17
       PolicyName: "bucket-modulespecific-policy"
       Roles: [!Ref RoleName]
