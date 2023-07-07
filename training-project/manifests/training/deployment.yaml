@@ -1,5 +1,5 @@
 name: training
-toolchainRegion: eu-central-1
+toolchainRegion: us-east-1
 groups:
   - name: storage
     path: manifests/training/storage.yaml
@@ -13,5 +13,5 @@ targetAccountMappings:
         envVariable: TARGET_ACCOUNT_ID
     default: true
     regionMappings:
-      - region: eu-central-1
+      - region: us-east-1
         default: true
