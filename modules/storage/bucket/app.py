@@ -5,8 +5,8 @@ import aws_cdk as cdk
 from aws_cdk import CfnOutput
 from stack import Stack
 
-deployment_name = os.getenv("TRAINING_DEPLOYMENT_NAME", "")
-module_name = os.getenv("TRAINING_MODULE_NAME", "")
+deployment_name = os.getenv("ADDF_DEPLOYMENT_NAME", "")
+module_name = os.getenv("ADDF_MODULE_NAME", "")
 
 environment = cdk.Environment(
     account=os.environ["CDK_DEFAULT_ACCOUNT"],
@@ -16,7 +16,7 @@ environment = cdk.Environment(
 app = cdk.App()
 stack = Stack(
     scope=app,
-    id=f"training-{deployment_name}-{module_name}",
+    id=f"addf-{deployment_name}-{module_name}",
     deployment_name=deployment_name,
     module_name=module_name,
     env=environment,
